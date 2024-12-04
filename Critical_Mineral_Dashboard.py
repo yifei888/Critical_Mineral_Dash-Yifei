@@ -3,7 +3,7 @@
 
 # In[12]:
 
-
+import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objs as go
@@ -100,7 +100,7 @@ fig.update_layout(
     barmode='stack'
 )
 
-fig.show()
+st.plotly_chart(fig)
 
 
 # In[ ]:
