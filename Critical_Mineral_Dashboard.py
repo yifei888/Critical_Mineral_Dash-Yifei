@@ -68,6 +68,7 @@ index_over_time = price_cleaned.index.to_series().apply(calculate_index_over_tim
 # In[44]:
 
 
+
 fig = make_subplots(
     rows=4, cols=2,
     specs=[[{"type": "pie"}, {"type": "bar"}],
@@ -100,9 +101,25 @@ fig.update_layout(
     barmode='stack'
 )
 
-st.plotly_chart(fig)
+tables = {
+    "Battery Market Share": market_shares_2023_cleaned,
+    "Minerals Compositions": lithium_composition,
+    "Minerals Prices": price_cleaned
+}
 
-
+tab1, tab2 = st.tabs(["📋 Tables", "📊 Graph"])
+with tab1:
+    st.subheader("Select a Table to View")
+    
+    # Dropdown for selecting a table
+    selected_table = st.selectbox("Choose a table:", list(tables.keys()))
+    
+    # Dynamically display the selected table
+    st.write(f"Displaying: {selected_table}")
+    st.dataframe(tables[selected_table]) 
+with tab2:
+    st.subheader("DashBoard")
+    st.plotly_chart(fig)
 # In[ ]:
 
 
